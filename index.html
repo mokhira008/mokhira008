@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</header>
+<style>
+.theme-toggle { 
+display: inline-flex;
+align-items: center; 
+gap: 8px; 
+padding: 8px 14px; 
+background-color: #2563eb; 
+color: white; 
+border: none; 
+border-radius: 8px; 
+cursor: pointer; 
+font-weight: 600; }
+.menu-toggle { 
+background: none; 
+border: none; 
+cursor: pointer; 
+padding: 5px; } 
+.menu-toggle span { 
+display: block; 
+width: 24px; 
+height: 3px; 
+background-color: #1e293b; 
+margin: 4px 0; 
+border-radius: 2px; }
+:root {
+    color-scheme: light;
+
+    --bg: #ffffff;
+    --surface: #f5f8fc;
+    --card: #ffffff;
+
+    --text: #17243a;
+    --muted: #68778d;
+
+    --line: #e5ebf3;
+
+    --blue: #3478f6;
+    --blue-dark: #205ed0;
+    --blue-pale: #eaf2ff;
+
+    --shadow: 0 18px 55px rgba(31, 68, 125, .10);
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --bg: #101827;
+    --surface: #151f31;
+    --card: #1b2940;
+
+    --text: #edf3ff;
+    --muted: #a6b4c9;
+
+    --line: #2b3a52;
+
+    --blue: #75a5ff;
+    --blue-dark: #9bbcff;
+    --blue-pale: #223657;
+
+    --shadow: 0 18px 55px rgba(0, 0, 0, .22);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "DM Sans", sans-serif;
+    line-height: 1.65;
+    transition: background .25s, color .25s;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+}
+
+.container {
+    width: min(1120px, calc(100% - 48px));
+    margin-inline: auto;
+}
+
+
+/* NAVIGATION */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+}
+
+.nav {
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    font: 800 31px/1 "Manrope", sans-serif;
+    letter-spacing: -3px;
+}
+
+.brand span,
+.blue-period {
+    color: var(--blue);
+}
+
+.nav-links {
+    display: flex;
+    gap: 34px;
+    margin-left: auto;
+    margin-right: 34px;
+}
+
+.nav-links a,
+.text-link {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+    transition: color .2s;
+}
+
+.nav-links a:hover,
+.text-link:hover {
+    color: var(--blue);
+}
+
+.theme-toggle {
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--text);
+    border-radius: 999px;
+    padding: 9px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.theme-icon {
+    color: var(--blue);
+    font-size: 16px;
+}
+
+
+/* HERO */
+
+.hero {
+    min-height: 620px;
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    align-items: center;
+    gap: 60px;
+    padding-block: 80px;
+}
+
+.eyebrow {
+    margin: 0 0 22px;
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+h1,
+h2,
+h3 {
+    font-family: "Manrope", sans-serif;
+}
+
+h1 {
+    font-size: clamp(42px, 5.5vw, 68px);
+    line-height: 1.12;
+    letter-spacing: -3.5px;
+    margin-bottom: 24px;
+    font-weight: 800;
+}
+
+h1 span {
+    color: var(--blue);
+}
+
+.hero-description {
+    max-width: 510px;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-top: 32px;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    padding: 14px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: transform .2s, background .2s;
+}
+
+.button:hover {
+    transform: translateY(-3px);
+}
+
+.button-primary {
+    color: #fff;
+    background: var(--blue);
+    box-shadow: 0 9px 22px rgba(52, 120, 246, .2);
+}
+
+.button-primary:hover {
+    background: var(--blue-dark);
+}
+
+
+/* HERO ILLUSTRATION */
+
+.hero-art {
+    min-height: 390px;
+    display: grid;
+    place-items: center;
+    position: relative;
+}
+
+.orbit {
+    position: absolute;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    transform: rotate(-25deg);
+}
+
+.orbit-one {
+    width: 390px;
+    height: 250px;
+}
+
+.orbit-two {
+    width: 320px;
+    height: 410px;
+    transform: rotate(35deg);
+}
+
+.hero-card {
+    position: relative;
+    width: min(330px, 85%);
+    padding: 20px 23px 27px;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+    transform: rotate(-5deg);
+}
+
+.card-top {
+    display: flex;
+    gap: 6px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 17px;
+    margin-bottom: 27px;
+}
+
+.card-top span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #f18c8c;
+}
+
+.card-top span:nth-child(2) {
+    background: #f4c66d;
+}
+
+.card-top span:nth-child(3) {
+    background: #62c99e;
+}
+
+.code-line {
+    height: 8px;
+    border-radius: 8px;
+    background: var(--line);
+    margin: 17px 0;
+}
+
+.code-line.short {
+    width: 30%;
+}
+
+.code-line.medium {
+    width: 58%;
+}
+
+.code-line.long {
+    width: 85%;
+}
+
+.code-line.blue-line {
+    background: var(--blue);
+    opacity: .65;
+    width: 68%;
+}
+
+.code-cursor {
+    position: absolute;
+    right: 25px;
+    bottom: 24px;
+    color: var(--blue);
+    font-size: 25px;
+}
+
+.floating-badge {
+    position: absolute;
+    padding: 10px 15px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.badge-top {
+    top: 55px;
+    right: 3px;
+    transform: rotate(6deg);
+}
+
+.badge-bottom {
+    bottom: 47px;
+    left: 0;
+    transform: rotate(-4deg);
+}
+
+
+/* GENERAL SECTIONS */
+
+.section {
+    padding-block: 105px;
+}
+
+.section-soft {
+    background: var(--surface);
+}
+
+.section-grid {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    gap: 90px;
+}
+
+h2 {
+    font-size: clamp(34px, 4vw, 48px);
+    line-height: 1.18;
+    letter-spacing: -2px;
+    margin-bottom: 0;
+}
+
+.section-content {
+    max-width: 620px;
+}
+
+.large-copy {
+    font: 600 22px/1.55 "Manrope", sans-serif;
+    letter-spacing: -.5px;
+}
+
+.section-content > p:not(.large-copy) {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+
+/* FACTS */
+
+.mini-facts {
+    display: flex;
+    gap: 45px;
+    border-top: 1px solid var(--line);
+    margin-top: 35px;
+    padding-top: 24px;
+}
+
+.mini-facts div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.fact-number {
+    color: var(--text);
+    font: 800 22px "Manrope", sans-serif;
+}
+
+
+/* COURSES */
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 30px;
+    margin-bottom: 42px;
+}
+
+.section-heading .eyebrow {
+    margin-bottom: 13px;
+}
+
+.heading-note {
+    color: var(--muted);
+    font-size: 13px;
+    max-width: 240px;
+    margin-bottom: 5px;
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 18px;
+}
+
+.course-card {
+    grid-column: span 2;
+    min-height: 275px;
+    padding: 27px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    position: relative;
+    transition: transform .2s, box-shadow .2s;
+}
+
+.course-card:nth-child(4) {
+    grid-column: 2 / span 2;
+}
+
+.course-card:nth-child(5) {
+    grid-column: 4 / span 2;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.course-number {
+    position: absolute;
+    top: 26px;
+    right: 27px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.course-icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--blue-pale);
+    color: var(--blue);
+    font: 700 17px "Manrope", sans-serif;
+    margin-bottom: 25px;
+}
+
+.math-icon {
+    font-size: 30px;
+}
+
+.language-icon {
+    font-size: 17px;
+}
+
+.course-card h3 {
+    font-size: 17px;
+    margin-bottom: 10px;
+    letter-spacing: -.4px;
+}
+
+.course-card p {
+    min-height: 70px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.course-tag,
+.project-chips span {
+    display: inline-block;
+    color: var(--blue);
+    background: var(--blue-pale);
+    border-radius: 999px;
+    padding: 5px 10px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* PROJECT */
+
+.project-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--card);
+}
+
+.project-visual {
+    min-height: 330px;
+    position: relative;
+    display: grid;
+    place-items: center;
+    padding: 35px;
+    background: linear-gradient(140deg, #dceaff, #eef4ff 55%, #c8dcff);
+}
+
+:root[data-theme="dark"] .project-visual {
+    background: linear-gradient(140deg, #1b3456, #223b60 55%, #294d7e);
+}
+
+.network-window {
+    width: min(390px, 100%);
+    border-radius: 10px;
+    background: #101d32;
+    color: #d9e6ff;
+    box-shadow: 0 20px 40px rgba(16, 29, 50, .25);
+    overflow: hidden;
+    transform: rotate(-3deg);
+}
+
+.window-bar {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 13px 15px;
+    background: #1b2b44;
+}
+
+.window-bar i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #f18c8c;
+}
+
+.window-bar i:nth-child(2) {
+    background: #f4c66d;
+}
+
+.window-bar i:nth-child(3) {
+    background: #62c99e;
+}
+
+.window-bar span {
+    margin-left: 10px;
+    color: #9db0cb;
+    font-size: 9px;
+}
+
+.terminal-content {
+    padding: 25px 20px 30px;
+    font: 10px/2.2 monospace;
+}
+
+.terminal-content p {
+    margin: 0;
+}
+
+.terminal-content b {
+    color: #6e9fff;
+    font-weight: 400;
+}
+
+.terminal-content p:first-child {
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.blink {
+    color: #7ed8b0;
+    animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+    to {
+        visibility: hidden;
+    }
+}
+
+.visual-label {
+    position: absolute;
+    right: 22px;
+    bottom: 18px;
+    color: #275aa7;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.project-info {
+    padding: 45px;
+    align-self: center;
+}
+
+.project-type {
+    color: var(--blue);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.project-info h3 {
+    font-size: 26px;
+    line-height: 1.25;
+    letter-spacing: -1px;
+    margin-bottom: 15px;
+}
+
+.project-info > p:not(.project-type) {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.project-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 22px 0;
+}
+
+.project-chips span {
+    color: var(--muted);
+    background: var(--surface);
+}
+
+.project-status {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.project-status span {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 7px;
+    border-radius: 50%;
+    background: #e9b75b;
+}
+
+
+/* CONTACT */
+
+.contact-section {
+    text-align: center;
+    padding-block: 115px 105px;
+}
+
+.contact-section .eyebrow {
+    margin-bottom: 18px;
+}
+
+.contact-section h2 {
+    font-size: clamp(42px, 6vw, 66px);
+}
+
+.contact-copy {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 20px 0 28px;
+}
+
+.email-note {
+    margin: 18px 0 0;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+
+/* FOOTER */
+
+.footer {
+    border-top: 1px solid var(--line);
+}
+
+.footer-inner {
+    min-height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.footer-inner p,
+.back-top {
+    margin: 0;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.back-top:hover {
+    color: var(--blue);
+}
+
+
+/* TABLET */
+
+@media (max-width: 800px) {
+
+    .hero {
+        min-height: auto;
+        grid-template-columns: 1fr .8fr;
+        gap: 20px;
+        padding-block: 75px;
+    }
+
+    .hero-art {
+        min-height: 300px;
+    }
+
+    .orbit-one {
+        width: 290px;
+        height: 190px;
+    }
+
+    .orbit-two {
+        width: 250px;
+        height: 310px;
+    }
+
+    .section-grid {
+        gap: 40px;
+    }
+
+    .project-info {
+        padding: 30px;
+    }
+
+    .course-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .course-card,
+    .course-card:nth-child(4),
+    .course-card:nth-child(5) {
+        grid-column: auto;
+    }
+}
+
+
+/* MOBILE */
+
+@media (max-width: 620px) {
+
+    .container {
+        width: min(100% - 36px, 500px);
+    }
+
+    .nav {
+        height: 68px;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        margin: 0;
+        padding: 18px 24px 22px;
+        background: var(--bg);
+        border-bottom: 1px solid var(--line);
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .menu-toggle {
+        width: 38px;
+        height: 38px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--card);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        margin-left: 8px;
+display: inline-flex; cursor: pointer; 
+
+    }
+
+    .menu-toggle span {
+        width: 15px;
+        height: 1.5px;
+        background: var(--text);
+    }
+
+    .theme-toggle {
+        margin-left: auto;
+        padding: 8px 10px;
+    }
+
+    .theme-label {
+        display: none;
+    }
+
+    .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+        padding-block: 65px 55px;
+    }
+
+    h1 {
+        font-size: clamp(43px, 12vw, 58px);
+        letter-spacing: -2.8px;
+    }
+
+    .hero-description {
+        font-size: 14px;
+    }
+
+    .hero-art {
+        min-height: 290px;
+        margin-top: 5px;
+    }
+
+    .badge-top {
+        right: 5px;
+        top: 25px;
+    }
+
+    .badge-bottom {
+        left: 5px;
+        bottom: 20px;
+    }
+
+    .section {
+        padding-block: 75px;
+    }
+
+    .section-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .large-copy {
+        font-size: 20px;
+    }
+
+    .mini-facts {
+        gap: 25px;
+    }
+
+    .section-heading {
+        align-items: start;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 28px;
+    }
+
+    .heading-note {
+        max-width: 100%;
+    }
+
+    .course-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .course-card {
+        min-height: auto;
+        padding: 23px;
+    }
+
+    .course-card p {
+        min-height: auto;
+    }
+
+    .project-card {
+        grid-template-columns: 1fr;
+    }
+
+    .project-visual {
+        min-height: 270px;
+        padding: 25px;
+    }
+
+    .project-info {
+        padding: 28px 24px 32px;
+    }
+
+    .project-info h3 {
+        font-size: 23px;
+    }
+
+    .contact-section {
+        padding-block: 85px 75px;
+    }
+
+    .footer-inner {
+        min-height: 90px;
+        flex-wrap: wrap;
+        padding-block: 20px;
+    }
+
+    .footer-inner p {
+        order: 3;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+
+}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohira | Personal Homepage</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+        <script src="script.js" defer></script>
+</head>
+
+<body>
+
+<header class="site-header">
+    <nav class="nav container">
+        <a class="brand" href="#home">m<span>.</span></a>
+
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#courses">Courses</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <button class="theme-toggle" id="themeToggle">
+            <span class="theme-icon">☾</span>
+            <span class="theme-label">Dark mode</span>
+        </button>
+
+        <button class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+</style>
+</header>
+
+<main id="home">
+
+    <!-- HERO SECTION -->
+    <section class="hero container">
+
+        <div class="hero-copy">
+            <p class="eyebrow">FIRST-YEAR IT STUDENT</p>
+
+            <h1>
+                Hi, I'm <span>Mohira.</span><br>
+                Curious by nature,<br>
+                building with code.
+            </h1>
+
+            <p class="hero-description">
+                I'm studying Information Technology at Inha University
+                in Tashkent. This is my corner of the web where I share
+                what I'm learning and creating.
+            </p>
+
+            <div class="hero-actions">
+                <a class="button button-primary" href="#projects">
+                    Explore my work ↗
+                </a>
+
+                <a class="text-link" href="#contact">
+                    Get in touch
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-art">
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+
+            <div class="hero-card">
+                <div class="card-top">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div class="code-line short"></div>
+                <div class="code-line long"></div>
+                <div class="code-line medium"></div>
+                <div class="code-line long blue-line"></div>
+                <div class="code-line short"></div>
+                <div class="code-line medium"></div>
+
+                <div class="code-cursor">✦</div>
+            </div>
+
+            <div class="floating-badge badge-top">
+                learn ↗
+            </div>
+
+            <div class="floating-badge badge-bottom">
+                ● always curious
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT ME -->
+    <section class="section section-soft" id="about">
+
+        <div class="container section-grid">
+
+            <div>
+                <p class="eyebrow">01 / ABOUT ME</p>
+                <h2>A little about<br>who I am.</h2>
+            </div>
+
+            <div class="section-content">
+
+                <p class="large-copy">
+                    I'm <strong>Maxamadjonova Mohira</strong>,
+                    a first-year IT student at
+                    <strong>Inha University in Tashkent</strong>.
+                </p>
+
+                <p>
+                    I'm at the beginning of my journey in technology,
+                    exploring how computers, code, and the internet work.
+                    I enjoy learning new things, solving problems,
+                    and turning what I study into practical projects.
+                </p>
+
+                <div class="mini-facts">
+
+                    <div>
+                        <span class="fact-number">01</span>
+                        <span>Year of study</span>
+                    </div>
+
+                    <div>
+                        <span class="fact-number">IT</span>
+                        <span>Field of study</span>
+                    </div>
+
+                    <div>
+                        <span class="fact-number">TAS</span>
+                        <span>Based in Tashkent</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- COURSES -->
+    <section class="section container" id="courses">
+
+        <div class="section-heading">
+
+            <div>
+                <p class="eyebrow">02 / WHAT I'M LEARNING</p>
+                <h2>My courses<span class="blue-period">.</span></h2>
+            </div>
+
+            <p class="heading-note">
+                The subjects shaping my first year in IT.
+            </p>
+
+        </div>
+
+        <div class="course-grid">
+
+            <article class="course-card">
+                <span class="course-number">01</span>
+                <div class="course-icon">&lt;/&gt;</div>
+                <h3>Introduction to IT</h3>
+                <p>
+                    Exploring the foundations of information technology,
+                    computer systems, and digital networks.
+                </p>
+                <span class="course-tag">Technology</span>
+            </article>
+
+            <article class="course-card">
+                <span class="course-number">02</span>
+                <div class="course-icon math-icon">∫</div>
+                <h3>Calculus</h3>
+                <p>
+                    Learning about functions, limits, derivatives,
+                    and the mathematics of change.
+                </p>
+                <span class="course-tag">Mathematics</span>
+            </article>
+
+            <article class="course-card">
+                <span class="course-number">03</span>
+                <div class="course-icon">&lt;C++&gt;</div>
+                <h3>Object-Oriented Programming</h3>
+                <p>
+                    Learning to structure programs with classes,
+                    objects, and reusable code.
+                </p>
+                <span class="course-tag">Programming</span>
+            </article>
+
+            <article class="course-card">
+                <span class="course-number">04</span>
+                <div class="course-icon language-icon">Aa</div>
+                <h3>English</h3>
+                <p>
+                    Building communication skills for university,
+                    collaboration, and technology.
+                </p>
+                <span class="course-tag">Communication</span>
+            </article>
+
+            <article class="course-card">
+                <span class="course-number">05</span>
+                <div class="course-icon math-icon">⚛</div>
+                <h3>Physics</h3>
+                <p>
+                    Understanding the principles that describe
+                    the physical world around us.
+                </p>
+                <span class="course-tag">Science</span>
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROJECTS -->
+    <section class="section section-soft" id="projects">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="eyebrow">03 / THINGS I'VE MADE</p>
+                    <h2>Selected project<span class="blue-period">.</span></h2>
+                </div>
+
+                <p class="heading-note">
+                    Small steps, practical learning.
+                </p>
+
+            </div>
+
+            <article class="project-card">
+
+                <div class="project-visual">
+
+                    <div class="network-window">
+
+                        <div class="window-bar">
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                            <span>network-notes.txt</span>
+                        </div>
+
+                        <div class="terminal-content">
+
+                            <p><b>01</b> NETWORK DETECTIVE</p>
+                            <p><b>02</b> Observe the network</p>
+                            <p><b>03</b> Trace the connection</p>
+                            <p>
+                                <b>04</b> Record your findings
+                                <span class="blink">_</span>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <span class="visual-label">LAB 8A</span>
+
+                </div>
+
+                <div class="project-info">
+
+                    <p class="project-type">
+                        INTRODUCTION TO IT · LAB NOTES
+                    </p>
+
+                    <h3>Lab 8a: Network Detective</h3>
+
+                    <p>
+                        Notes and observations from my Lab 8a task,
+                        collecting key ideas about networks and how
+                        connected devices communicate.
+                    </p>
+
+                    <div class="project-chips">
+                        <span>Networking</span>
+                        <span>Lab notes</span>
+                        <span>First year</span>
+                    </div>
+
+                    <span class="project-status">
+                        <span></span> Learning in progress
+                    </span>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+    <section class="section contact-section container" id="contact">
+
+        <p class="eyebrow">04 / SAY HELLO</p>
+
+        <h2>
+            Have a question<br>
+            or an idea<span class="blue-period">?</span>
+        </h2>
+
+        <p class="contact-copy">
+            I'm always happy to connect, learn, and exchange ideas.
+        </p>
+
+        <a class="button button-primary" href="mailto:maxamadjonovam008@gmail.com">
+            Email me ↗
+        </a>
+
+    </section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+
+    <div class="container footer-inner">
+
+        <a class="brand" href="#home">m<span>.</span></a>
+
+        <p>
+            Designed & built by Mohira ·
+            <span id="year"></span>
+        </p>
+
+        <a href="#home" class="back-top">
+            Back to top ↑
+        </a>
+
+    </div>
+
+</footer>
+
+</body>
+</html>
